@@ -1,0 +1,3 @@
+Modified lines 23 - 25 of edge_se2Switchable.cpp because of error DenseBase::resize() does not actually allow to resize
+Commenting them out does not affect functionality???
+

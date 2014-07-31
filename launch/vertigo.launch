@@ -1,0 +1,8 @@
+<!--
+  Run vertigo example
+-->
+
+<launch>
+  <node pkg="vertigo" type="vertigo_load_dataset" name="vertigo_load_dataset" args="/home/liz/Data/maxmix_manhattan.g2o" output="screen">
+  </node>
+</launch>
