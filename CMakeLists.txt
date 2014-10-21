@@ -10,14 +10,14 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake-modules/")
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   visualization_msgs
-)
+  )
 
 ## System dependencies are found with CMake's conventions
 find_package(Eigen3 REQUIRED)
 find_package(SuiteSparse REQUIRED)
-find_package(G2O REQUIRED)
 find_package(Boost REQUIRED COMPONENTS thread)
-message("G2O Libraries: " ${G2O_LIBRARIES})
+find_package(G2O REQUIRED)
+
 ###################################
 ## catkin specific configuration ##
 ###################################
@@ -30,10 +30,10 @@ message("G2O Libraries: " ${G2O_LIBRARIES})
 
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES vertigo_g2o ${G2O_LIBRARIES} ${CSPARSE_LIBARIES} ${EIGEN3_LIBRARIES} 
+  LIBRARIES vertigo_g2o ${CSPARSE_LIBARIES} ${EIGEN3_LIBRARIES} ${G2O_LIBRARIES}
   CATKIN_DEPENDS roscpp 
-  DEPENDS G2O Eigen3 SuiteSparse 
-)
+  DEPENDS Eigen3 SuiteSparse G2O 
+  )
 
 ###########
 ## Build ##
@@ -47,10 +47,10 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/include
   ${EIGEN3_INCLUDE_DIR}
   ${CSPARSE_INCLUDE_DIR}
-  ${G2O_INCLUDE_DIR}
   ${catkin_INCLUDE_DIRS}
   ${BOOST_INCLUDE_DIRS}
-)
+  ${G2O_INCLUDE_DIR}
+  )
 
 ## Declare a cpp library
 add_library(vertigo_g2o 
@@ -60,7 +60,7 @@ add_library(vertigo_g2o
   src/g2o/edge_se2MaxMixture.cpp
   src/g2o/edge_se3Switchable.cpp
   src/g2o/vertex_switchLinear.cpp
-)
+  )
 
 ## Declare a cpp executable
 add_executable(vertigo_load_dataset examples/robustG2O/load_dataset_test.cpp)
@@ -71,9 +71,9 @@ add_executable(vertigo_incremental_optimization examples/robustG2O/incremental_o
 # add_dependencies(vertigo_node vertigo_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(vertigo_g2o ${catkin_LIBRARIES} ${G2O_LIBRARIES} ${EIGEN3_LIBRARIES})
-target_link_libraries(vertigo_load_dataset ${catkin_LIBRARIES} ${G2O_LIBRARIES} ${CSPARSE_LIBRARY} vertigo_g2o g2o_types_slam2d)
-target_link_libraries(vertigo_incremental_optimization ${catkin_LIBRARIES} ${G2O_LIBRARIES} ${CSPARSE_LIBRARY} vertigo_g2o g2o_types_slam2d)
+target_link_libraries(vertigo_g2o ${catkin_LIBRARIES} ${EIGEN3_LIBRARIES} ${G2O_LIBRARIES} )
+target_link_libraries(vertigo_load_dataset ${catkin_LIBRARIES} ${CSPARSE_LIBRARY} ${G2O_LIBRARIES} vertigo_g2o)
+target_link_libraries(vertigo_incremental_optimization ${catkin_LIBRARIES} ${CSPARSE_LIBRARY} ${G2O_LIBRARIES} vertigo_g2o)
 
 #############
 ## Install ##
@@ -81,8 +81,8 @@ target_link_libraries(vertigo_incremental_optimization ${catkin_LIBRARIES} ${G2O
 
 install(DIRECTORY include/ DESTINATION include)
 install(TARGETS vertigo_g2o 
-    LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-    )
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  )
 
 
 
