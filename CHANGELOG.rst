@@ -2,6 +2,11 @@
 Changelog for package vertigo_slam
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* vertigo_slam depends on visualization_msgs
+* Contributors: Jon Binney, Jonathan Binney
+
 0.1.0 (2014-10-24)
 ------------------
 * Cleanup package.xml and cmakelists
