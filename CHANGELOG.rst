@@ -2,8 +2,8 @@
 Changelog for package vertigo_slam
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.1 (2014-10-24)
+------------------
 * vertigo_slam depends on visualization_msgs
 * Contributors: Jon Binney, Jonathan Binney
 
